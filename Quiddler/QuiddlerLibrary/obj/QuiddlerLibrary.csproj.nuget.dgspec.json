@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\School\\.NET\\Quiddler\\QuiddlerLibrary\\QuiddlerLibrary\\QuiddlerLibrary.csproj": {}
+    "C:\\School\\.NET\\Quiddler\\Quiddler\\QuiddlerLibrary\\QuiddlerLibrary.csproj": {}
   },
   "projects": {
-    "C:\\School\\.NET\\Quiddler\\QuiddlerLibrary\\QuiddlerLibrary\\QuiddlerLibrary.csproj": {
+    "C:\\School\\.NET\\Quiddler\\Quiddler\\QuiddlerLibrary\\QuiddlerLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\School\\.NET\\Quiddler\\QuiddlerLibrary\\QuiddlerLibrary\\QuiddlerLibrary.csproj",
+        "projectUniqueName": "C:\\School\\.NET\\Quiddler\\Quiddler\\QuiddlerLibrary\\QuiddlerLibrary.csproj",
         "projectName": "QuiddlerLibrary",
-        "projectPath": "C:\\School\\.NET\\Quiddler\\QuiddlerLibrary\\QuiddlerLibrary\\QuiddlerLibrary.csproj",
+        "projectPath": "C:\\School\\.NET\\Quiddler\\Quiddler\\QuiddlerLibrary\\QuiddlerLibrary.csproj",
         "packagesPath": "C:\\Users\\Brittany\\.nuget\\packages\\",
-        "outputPath": "C:\\School\\.NET\\Quiddler\\QuiddlerLibrary\\QuiddlerLibrary\\obj\\",
+        "outputPath": "C:\\School\\.NET\\Quiddler\\Quiddler\\QuiddlerLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
