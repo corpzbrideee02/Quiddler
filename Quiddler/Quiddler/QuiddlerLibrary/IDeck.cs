@@ -10,5 +10,12 @@ namespace QuiddlerLibrary
 {
     public interface IDeck
     {
+        public string About { get; }
+        public int CardCount { get; init; }
+        public int CardsPerPlayer { get; set; }
+        public string TopDiscard { get; }
+
+        IPlayer NewPlayer();
+        public string ToString();
     }
 }
