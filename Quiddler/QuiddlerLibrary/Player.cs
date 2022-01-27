@@ -47,9 +47,11 @@ namespace QuiddlerLibrary
 
         public int PlayWord(string candidate)
         {
-            if (TestWord(candidate) > 0)
+            int points = TestWord(candidate);
+
+            if (points > 0)
             {
-                //TotalPoints += TestWord(candidate);
+                //TotalPoints += points;
             }
 
             throw new NotImplementedException();
@@ -57,13 +59,30 @@ namespace QuiddlerLibrary
 
         public int TestWord(string candidate)
         {
-            candidate = candidate.ToLower();
+            if (candidate.Length > 0)
+            {
+                candidate = candidate.ToLower();
 
-            
-            bool isWord = App.CheckSpelling(candidate);
-            App.Quit();
-            
-            throw new NotImplementedException();
+                string[] wordArray = candidate.Split(' ');
+
+                string wordNoSpace = "";
+
+                foreach (var w in wordArray)
+                    wordNoSpace += w;
+
+                bool isWord = App.CheckSpelling(wordNoSpace);
+                App.Quit();
+
+                if (isWord)
+                {
+                    // TODO: add up points
+                }
+                else
+                    return 0;
+
+                
+            }
+            return 0;
         }
 
         public override string ToString()
