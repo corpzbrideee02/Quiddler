@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuiddlerLibrary
 {
-    interface IDeck
+    public interface IDeck
     {
     }
 }

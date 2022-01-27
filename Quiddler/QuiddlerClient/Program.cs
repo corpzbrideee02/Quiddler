@@ -1,6 +1,7 @@
 ﻿// Brittany Diesbourg & Dianne Corpuz - Section A
 
 using System;
+using QuiddlerLibrary;
 
 namespace QuiddlerClient
 {
@@ -8,6 +9,7 @@ namespace QuiddlerClient
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("Hello World!");
         }
     }
