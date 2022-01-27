@@ -8,17 +8,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuiddlerPlayer
+namespace QuiddlerLibrary
 {
-    public class Player : IPlayer
+    internal class Player : IPlayer
     {
-        public int CardCount { get; }
+        // private members
+        private Application App = new Application();
+        private List<string> Cards = new List<string>();
+        private Deck PlayerDeck = null;
+
+
+        // implement the IPlayer interface
+
+        public int CardCount => Cards.Count;
 
         public int TotalPoints { get; }
 
-        public Player( Deck d)
+        public Player(Deck d)
         {
-            CardCount = 0;
+            PlayerDeck = d;
             TotalPoints = 0;
         }
 
@@ -51,16 +59,22 @@ namespace QuiddlerPlayer
         {
             candidate = candidate.ToLower();
 
-            Application app = new Application();
-            bool isWord = app.CheckSpelling(candidate);
-            app.Quit();
+            
+            bool isWord = App.CheckSpelling(candidate);
+            App.Quit();
             
             throw new NotImplementedException();
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            string cardsDisplay = "Your cards are [";
+
+            foreach (var c in Cards)
+                cardsDisplay += c + " ";
+            cardsDisplay += "].";
+
+            return cardsDisplay;
         }
     }
 }

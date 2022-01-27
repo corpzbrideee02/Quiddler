@@ -1,0 +1,15 @@
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\bin\Debug\net5.0\QuiddlerLibrary.deps.json
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\bin\Debug\net5.0\QuiddlerLibrary.dll
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\bin\Debug\net5.0\ref\QuiddlerLibrary.dll
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\bin\Debug\net5.0\QuiddlerLibrary.pdb
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\QuiddlerLibrary.csproj.AssemblyReference.cache
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\Interop.Microsoft.Office.Interop.Word.dll
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\Interop.Microsoft.Office.Core.dll
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\QuiddlerLibrary.csproj.ResolveComReference.cache
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\QuiddlerLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\QuiddlerLibrary.AssemblyInfoInputs.cache
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\QuiddlerLibrary.AssemblyInfo.cs
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\QuiddlerLibrary.csproj.CoreCompileInputs.cache
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\QuiddlerLibrary.dll
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\ref\QuiddlerLibrary.dll
+C:\School\.NET\Quiddler\Quiddler\QuiddlerLibrary\obj\Debug\net5.0\QuiddlerLibrary.pdb

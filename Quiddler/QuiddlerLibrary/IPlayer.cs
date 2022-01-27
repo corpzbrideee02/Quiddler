@@ -13,11 +13,11 @@ namespace QuiddlerLibrary
         int CardCount { get; }
         int TotalPoints { get; }
 
-        public string DrawCard();
-        public bool Discard(string card);
-        public string PickupTopDiscard();
-        public int PlayWord(string candidate);
-        public int TestWord(string candidate);
-        public string ToString();
+        string DrawCard();
+        bool Discard(string card);
+        string PickupTopDiscard();
+        int PlayWord(string candidate);
+        int TestWord(string candidate);
+        string ToString();
     }
 }

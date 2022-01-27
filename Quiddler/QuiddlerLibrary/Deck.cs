@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuiddlerLibrary
 {
-    public class Deck
+    public class Deck : IDeck
     {
     }
 }
