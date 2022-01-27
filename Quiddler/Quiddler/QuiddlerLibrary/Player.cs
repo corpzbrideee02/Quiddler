@@ -78,9 +78,7 @@ namespace QuiddlerLibrary
                     // TODO: add up points
                 }
                 else
-                    return 0;
-
-                
+                    return 0;                
             }
             return 0;
         }
