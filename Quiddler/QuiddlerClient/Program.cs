@@ -1,6 +1,7 @@
 ﻿// Brittany Diesbourg & Dianne Corpuz - Section A
 
 using System;
+using QuiddlerLibrary;
 
 namespace QuiddlerClient
 {
