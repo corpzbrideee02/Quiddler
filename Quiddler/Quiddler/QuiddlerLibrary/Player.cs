@@ -13,22 +13,21 @@ namespace QuiddlerLibrary
     internal class Player : IPlayer
     {
         // private members
-        private Application App = new Application();
+        
         private List<string> Cards = new List<string>();
         private Deck PlayerDeck = null;
-
-
-        // implement the IPlayer interface
-
-        public int CardCount => Cards.Count;
-
-        public int TotalPoints { get; }
 
         public Player(Deck d)
         {
             PlayerDeck = d;
             TotalPoints = 0;
         }
+
+        // implement the IPlayer interface
+
+        public int CardCount => Cards.Count;
+
+        public int TotalPoints { get; set; }        
 
         public bool Discard(string card)
         {
@@ -51,7 +50,7 @@ namespace QuiddlerLibrary
 
             if (points > 0)
             {
-                //TotalPoints += points;
+                TotalPoints += points;
             }
 
             throw new NotImplementedException();
@@ -70,6 +69,7 @@ namespace QuiddlerLibrary
                 foreach (var w in wordArray)
                     wordNoSpace += w;
 
+                Application App = new Application();
                 bool isWord = App.CheckSpelling(wordNoSpace);
                 App.Quit();
 
