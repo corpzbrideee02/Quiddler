@@ -41,7 +41,8 @@ namespace QuiddlerLibrary
 
         public string PickupTopDiscard()
         {
-            throw new NotImplementedException();
+            Cards.Add(PlayerDeck.TopDiscard);
+            return Cards[CardCount - 1];
         }
 
         public int PlayWord(string candidate)
@@ -50,10 +51,12 @@ namespace QuiddlerLibrary
 
             if (points > 0)
             {
+                //TODO discard the cards in the word from player cards
+
                 TotalPoints += points;
             }
 
-            throw new NotImplementedException();
+            return points;
         }
 
         public int TestWord(string candidate)
@@ -64,21 +67,24 @@ namespace QuiddlerLibrary
 
                 string[] wordArray = candidate.Split(' ');
 
-                string wordNoSpace = "";
-
-                foreach (var w in wordArray)
-                    wordNoSpace += w;
-
-                Application App = new Application();
-                bool isWord = App.CheckSpelling(wordNoSpace);
-                App.Quit();
-
-                if (isWord)
+                if (wordArray.Length < CardCount) // makes sure there's at least 1 card left over to discard
                 {
-                    // TODO: add up points
-                }
-                else
-                    return 0;                
+                    //TODO check if letters are in player's cards
+
+                    string wordNoSpace = "";
+
+                    foreach (var w in wordArray)
+                        wordNoSpace += w;
+
+                    Application App = new Application();
+                    bool isWord = App.CheckSpelling(wordNoSpace);
+                    App.Quit();
+
+                    if (isWord)
+                    {
+                        // TODO: add up points
+                    }
+                }                                
             }
             return 0;
         }
