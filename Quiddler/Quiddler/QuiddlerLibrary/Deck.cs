@@ -77,13 +77,14 @@ namespace QuiddlerLibrary
                 var random_ = new Random();
                 int index = random_.Next(CardCountsInDeck.Count());  //index of random picked items
 
-                var itemsPicked = CardCountsInDeck.ElementAt(index).Key;
+                var itemsPicked = "";
+                if (CardCountsInDeck.ElementAt(index).Value!=0)
+                {
 
+                    itemsPicked = CardCountsInDeck.ElementAt(index).Key;
+                    CardCountsInDeck[CardCountsInDeck.ElementAt(index).Key] = CardCountsInDeck.ElementAt(index).Value - 1;
 
-                CardCountsInDeck[CardCountsInDeck.ElementAt(index).Key] = CardCountsInDeck.ElementAt(index).Value - 1;
-                itemsPicked = CardCountsInDeck.ElementAt(index).Key;
-                    
-                
+                }
 
                 return itemsPicked;
             }
@@ -118,8 +119,6 @@ namespace QuiddlerLibrary
 
         public override string ToString()
         {
-
-            CardCountsInDeck["e"] = 3;  //this is how to update the value
             string deckInitialized = "";
             foreach (var cards in CardCountsInDeck)
             {
