@@ -10,7 +10,51 @@ namespace QuiddlerClient
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Hello World!");
+            IDeck deck = new Deck();
+
+            Console.WriteLine(deck.About);
+
+            string input;
+            int playerNum;
+
+            Console.WriteLine("Deck initialized with the following " + deck.CardCount + " cards...");
+            Console.WriteLine(deck);
+
+            do
+            {
+                Console.WriteLine("How many players are there? (1‐8): ");
+                input = Console.ReadLine();
+
+                playerNum = int.Parse(input);
+
+            } while (playerNum < 1 || playerNum > 8);
+
+           
+
+            input = "";
+
+            int cardNum;
+            do
+            {
+                Console.WriteLine("How many cards will be dealt to each player? (3‐10):");
+                input = Console.ReadLine();
+
+                cardNum = int.Parse(input);
+
+            } while (cardNum < 3 || cardNum > 10);
+
+            deck.CardsPerPlayer = cardNum;
+
+            for (int i = 0; i < playerNum; ++i)
+                deck.NewPlayer();
+
+            Console.WriteLine("Cards were dealt to" + playerNum + " player(s).");
+
+            string discard = deck.TopDiscard;
+
+            Console.WriteLine("The top card which was '" + discard + "' was moved to the discard pile.");
+
+            // TO DO loop for the game
         }
     }
 }
