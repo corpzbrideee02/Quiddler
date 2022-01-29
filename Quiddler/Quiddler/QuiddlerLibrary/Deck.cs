@@ -69,33 +69,7 @@ namespace QuiddlerLibrary
             }
         }
 
-        //To be implemented
-       /* public string TopDiscard
-        {
-            get
-            {
-                var random_ = new Random();
-                int index = random_.Next(CardCountsInDeck.Count());  //index of random picked items
-
-                var itemsPicked = CardCountsInDeck.ElementAt(index).Key;
-
-                var returnString = "";
-
-                for(int i=0; i<CardCountsInDeck.Count; i++)
-                {
-                    if (CardCountsInDeck.ElementAt(i).Key.Equals(itemsPicked)){
-
-                        CardCountsInDeck[CardCountsInDeck.ElementAt(i).Key] = CardCountsInDeck.ElementAt(i).Value - 1;
-                        returnString = CardCountsInDeck.ElementAt(i).Key;
-                    }
-                }
-
-                return returnString;
-            }
-        }*/
-
-
-        //To be implemented
+        
         public string TopDiscard
         {
             get
@@ -105,14 +79,13 @@ namespace QuiddlerLibrary
 
                 var itemsPicked = CardCountsInDeck.ElementAt(index).Key;
 
-                var returnString = "";
 
                 CardCountsInDeck[CardCountsInDeck.ElementAt(index).Key] = CardCountsInDeck.ElementAt(index).Value - 1;
-               returnString = CardCountsInDeck.ElementAt(index).Key;
+                itemsPicked = CardCountsInDeck.ElementAt(index).Key;
                     
                 
 
-                return returnString;
+                return itemsPicked;
             }
         }
 
@@ -138,7 +111,7 @@ namespace QuiddlerLibrary
             //create new player, populates it with CardsPerPlayer cards
 
             IPlayer newPlayer = new Player(this);
-            /players.Add(newPlayer);
+            players.Add(newPlayer);
 
             return newPlayer;
         }
