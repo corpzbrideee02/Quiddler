@@ -70,7 +70,67 @@ namespace QuiddlerLibrary
         }
 
         //To be implemented
-        public string TopDiscard => throw new NotImplementedException();
+       /* public string TopDiscard
+        {
+            get
+            {
+                var random_ = new Random();
+                int index = random_.Next(CardCountsInDeck.Count());  //index of random picked items
+
+                var itemsPicked = CardCountsInDeck.ElementAt(index).Key;
+
+                var returnString = "";
+
+                for(int i=0; i<CardCountsInDeck.Count; i++)
+                {
+                    if (CardCountsInDeck.ElementAt(i).Key.Equals(itemsPicked)){
+
+                        CardCountsInDeck[CardCountsInDeck.ElementAt(i).Key] = CardCountsInDeck.ElementAt(i).Value - 1;
+                        returnString = CardCountsInDeck.ElementAt(i).Key;
+                    }
+                }
+
+                return returnString;
+            }
+        }*/
+
+
+        //To be implemented
+        public string TopDiscard
+        {
+            get
+            {
+                var random_ = new Random();
+                int index = random_.Next(CardCountsInDeck.Count());  //index of random picked items
+
+                var itemsPicked = CardCountsInDeck.ElementAt(index).Key;
+
+                var returnString = "";
+
+                CardCountsInDeck[CardCountsInDeck.ElementAt(index).Key] = CardCountsInDeck.ElementAt(index).Value - 1;
+               returnString = CardCountsInDeck.ElementAt(index).Key;
+                    
+                
+
+                return returnString;
+            }
+        }
+
+
+
+        //Pick a random card from the deck
+        public string GetRandomCard()
+        {
+                var random_ = new Random();
+                int index = random_.Next(CardCountsInDeck.Count());  //index of card picked by random generator
+
+                    var itemsPicked =  CardCountsInDeck.ElementAt(index).Key;
+                    
+
+             return itemsPicked;
+        }
+
+
 
 
         IPlayer IDeck.NewPlayer()
@@ -78,17 +138,19 @@ namespace QuiddlerLibrary
             //create new player, populates it with CardsPerPlayer cards
 
             IPlayer newPlayer = new Player(this);
-            //players.Add(newPlayer);
+            /players.Add(newPlayer);
 
             return newPlayer;
         }
 
         public override string ToString()
         {
+
+            CardCountsInDeck["e"] = 3;  //this is how to update the value
             string deckInitialized = "";
             foreach (var cards in CardCountsInDeck)
             {
-                deckInitialized += $"({cards.Key}{cards.Value}) ";
+                deckInitialized += $"{cards.Key}({cards.Value}) ";
             }
             return deckInitialized;
         }
