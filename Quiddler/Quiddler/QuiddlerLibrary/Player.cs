@@ -36,7 +36,21 @@ namespace QuiddlerLibrary
 
         public string DrawCard()
         {
-            throw new NotImplementedException();
+            Random random;
+            int index;
+
+            //do
+            //{
+            //    random = new Random();
+            //    index = random.Next(PlayerDeck.CardCount - 1);  //index of random card picked
+
+            //} while (PlayerDeck.CardCountsInDeck.ElementAt(index).Value != 0);
+                
+            //Cards.Add(PlayerDeck.CardCountsInDeck.ElementAt(index).Key);
+
+            //--CardCountsInDeck.ElementAt(index).Value;
+
+            return Cards[CardCount - 1];
         }
 
         public string PickupTopDiscard()
