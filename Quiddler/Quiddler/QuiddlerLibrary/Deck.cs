@@ -129,13 +129,21 @@ namespace QuiddlerLibrary
 
 
 
-        //*************************************NoTE: just added these methods... Please disregard   *************************************
+        //*************************************NoTE: just added these methods...   *************************************
 
         public Dictionary<string, int> GetCardsInDeck
         {
             get
             {
                 return CardsInDeck;
+            }
+
+            set
+            {
+                if (value != CardsInDeck)
+                {
+                    CardsInDeck = value; 
+                }
             }
         }
 
@@ -145,6 +153,15 @@ namespace QuiddlerLibrary
             {
                 return CardPointValues;
             }
+        }
+
+        public Stack<string> GetDiscardedCards
+        {
+            get
+            {
+                return DiscardedCards;
+            }
+
         }
 
 
