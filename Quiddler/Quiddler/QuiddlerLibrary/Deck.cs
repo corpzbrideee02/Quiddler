@@ -16,6 +16,7 @@ namespace QuiddlerLibrary
         private static int Twelve = 12, Ten = 10, Eight = 8, Six = 6, Four = 4, Two = 2;
 
         private int undealtCards=118;
+        private string topDiscard = "";
 
         //c'tor 
         public Deck()
@@ -71,34 +72,28 @@ namespace QuiddlerLibrary
             }
         }
 
-        //if user wants the top discarded card, it will just gets it from the myStack(stack of discarded card)
-        //if not, it will randomly gets the card from the CardsInDeck(Dictionary)
         public string TopDiscard
         {
             get
             {
-                if(TopDiscard==null)
-                {
+                if(topDiscard.Equals("")){
                     var random_ = new Random();
                     int index = random_.Next(CardsInDeck.Count());  //index of random picked items
 
-                    var itemsPicked = "";
                     if (CardsInDeck.ElementAt(index).Value > 0)
                     {
 
-                        itemsPicked = CardsInDeck.ElementAt(index).Key;
+                        topDiscard = CardsInDeck.ElementAt(index).Key;
                         CardsInDeck[CardsInDeck.ElementAt(index).Key] = CardsInDeck.ElementAt(index).Value - 1;
-                        DiscardedCards.Push(itemsPicked);
+                        DiscardedCards.Push(topDiscard);
+                        --undealtCards;
                     }
 
-                    --undealtCards;
-                    return itemsPicked;
+                    return topDiscard;
                 }
 
-                
                 --undealtCards;
-                return DiscardedCards.Pop();
-                
+               return DiscardedCards.Pop();
             }
         }
 
