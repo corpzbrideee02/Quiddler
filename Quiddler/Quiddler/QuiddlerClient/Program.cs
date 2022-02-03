@@ -37,7 +37,7 @@ namespace QuiddlerClient
             int cardNum;
             do
             {
-                Console.Write("\nHow many cards will be dealt to each player? (3‐10):");
+                Console.Write("\nHow many cards will be dealt to each player? (3‐10) :");
                 input = Console.ReadLine();
 
                 cardNum = int.Parse(input);

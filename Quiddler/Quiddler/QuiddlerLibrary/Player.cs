@@ -35,6 +35,8 @@ namespace QuiddlerLibrary
             {
                 Cards.Remove(card);
                 // TODO: put card in discard pile
+                //GameDeck.DiscardedCards.push(card);
+                return true;
             }
             return false;
         }
@@ -47,16 +49,16 @@ namespace QuiddlerLibrary
             Random random;
             int index;
 
-            //do
-            //{
-            //    random = new Random();
-            //    index = random.Next(PlayerDeck.CardCount - 1);  //index of random card picked
+            do
+            {
+                random = new Random();
+                index = random.Next(GameDeck.GetCardsInDeck.Count - 1);  //index of random card picked
 
-            //} while (PlayerDeck.CardCountsInDeck.ElementAt(index).Value != 0);
-                
-            //Cards.Add(PlayerDeck.CardCountsInDeck.ElementAt(index).Key);
+            } while (GameDeck.GetCardsInDeck.ElementAt(index).Value == 0);
 
-            //--CardCountsInDeck.ElementAt(index).Value;
+            Cards.Add(GameDeck.GetCardsInDeck.ElementAt(index).Key);
+
+            //--GameDeck.CardsInDeck.ElementAt(index).Value;
 
             return Cards[CardCount - 1];
         }
@@ -97,22 +99,24 @@ namespace QuiddlerLibrary
                 if (wordArray.Length < CardCount) // makes sure there's at least 1 card left over in player's hand to discard
                 {
                     string wordNoSpace = "";
+                    int points = 0;
 
                     foreach (var w in wordArray)
                     {
                         if (!Cards.Contains(w))
                             return 0;
                         wordNoSpace += w;
+                        var cardPoints = GameDeck.GetCardPointValues.FirstOrDefault(c => c.Key == w); // look up the card's point value
+                        points += cardPoints.Value;
                     }
 
                     Application App = new Application(); // should be moved to Deck class
+
                     bool isWord = App.CheckSpelling(wordNoSpace);
                     App.Quit(); // call in Dispose?
 
                     if (isWord)
-                    {
-                        // TODO: add up points
-                    }
+                        return points;
                 }                                
             }
             return 0;
