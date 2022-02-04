@@ -35,7 +35,7 @@ namespace QuiddlerLibrary
             {
                 Cards.Remove(card);
                 // TODO: put card in discard pile
-                //GameDeck.DiscardedCards.push(card);
+                GameDeck.DiscardedCards.Push(card);
                 return true;
             }
             return false;
@@ -52,13 +52,13 @@ namespace QuiddlerLibrary
             do
             {
                 random = new Random();
-                index = random.Next(GameDeck.GetCardsInDeck.Count - 1);  //index of random card picked
+                index = random.Next(GameDeck.CardsInDeck.Count - 1);  //index of random card picked
 
-            } while (GameDeck.GetCardsInDeck.ElementAt(index).Value == 0);
+            } while (GameDeck.CardsInDeck.ElementAt(index).Value == 0);
 
-            Cards.Add(GameDeck.GetCardsInDeck.ElementAt(index).Key);
+            Cards.Add(GameDeck.CardsInDeck.ElementAt(index).Key);
 
-            //--GameDeck.CardsInDeck.ElementAt(index).Value;
+            GameDeck.CardsInDeck[GameDeck.CardsInDeck.ElementAt(index).Key] = GameDeck.CardsInDeck.ElementAt(index).Value - 1;
 
             return Cards[CardCount - 1];
         }
@@ -106,7 +106,7 @@ namespace QuiddlerLibrary
                         if (!Cards.Contains(w))
                             return 0;
                         wordNoSpace += w;
-                        var cardPoints = GameDeck.GetCardPointValues.FirstOrDefault(c => c.Key == w); // look up the card's point value
+                        var cardPoints = GameDeck.CardPointValues.FirstOrDefault(c => c.Key == w); // look up the card's point value
                         points += cardPoints.Value;
                     }
 

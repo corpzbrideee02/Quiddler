@@ -56,7 +56,7 @@ namespace QuiddlerClient
 
             string discard = deck.TopDiscard;
 
-            Console.WriteLine($"The top card which was {discard} was moved to the discard pile.");
+            Console.WriteLine($"The top card which was '{discard}' was moved to the discard pile.");
 
             // PLAY THE GAME
 
@@ -67,7 +67,7 @@ namespace QuiddlerClient
             {
                 for (int i = 0; i < players.Count; ++i) // do this for each player in a round
                 {
-                    Console.WriteLine("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
+                    Console.WriteLine("\n‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
                     Console.WriteLine($"Player {i+1} ({players[i].TotalPoints} points)");
                     Console.WriteLine("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
 
@@ -79,7 +79,7 @@ namespace QuiddlerClient
                     // ask for top discard
                     do
                     {
-                        Console.Write($"Do you want the top card in the discard pile which is '{deck.TopDiscard}'? (y/n): ");
+                        Console.Write($"\nDo you want the top card in the discard pile which is '{deck.TopDiscard}'? (y/n): ");
                         yOrN = char.ToLower(Console.ReadKey().KeyChar);
 
                     } while (yOrN != 'y' || yOrN != 'n');
