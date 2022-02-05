@@ -10,15 +10,15 @@ namespace QuiddlerLibrary
     {
         // Private member variables
         private int cardsToBeDealt = 0;
-        private const int NumberOfCards = 118;
-        private int undealtCards=118;
-        private string topDiscard = "";
+        public int undealtCards = 118;
+        //private const int NumberOfCards = 118;
+        //private string topDiscard = "";
 
         //c'tor 
-        public Deck()
+        /*public Deck()
         {
             ShuffleCardsInDeck();
-        }
+        }*/
 
 
         public string About => $"Test Client for: {GetType().Namespace}, Developers: Brittany Diesbourg and Dianne Corpuz";
@@ -74,24 +74,25 @@ namespace QuiddlerLibrary
         {
             get
             {
-                if(topDiscard.Equals("")){
+                if(DiscardedCards.Count==0)
+                {
                     var random_ = new Random();
                     int index = random_.Next(CardsInDeck.Count());  //index of random picked items
 
+                    string selectedTopDiscard = "";
                     if (CardsInDeck.ElementAt(index).Value > 0)
                     {
-
-                        topDiscard = CardsInDeck.ElementAt(index).Key;
+                        selectedTopDiscard = CardsInDeck.ElementAt(index).Key;
                         CardsInDeck[CardsInDeck.ElementAt(index).Key] = CardsInDeck.ElementAt(index).Value - 1;
-                        DiscardedCards.Push(topDiscard);
+                        DiscardedCards.Push(selectedTopDiscard);
                         --undealtCards;
                     }
 
-                    return topDiscard;
+                    return selectedTopDiscard;
                 }
 
                 --undealtCards;
-               return DiscardedCards.Pop();
+               return DiscardedCards.Peek();
             }
         }
 
@@ -103,7 +104,7 @@ namespace QuiddlerLibrary
             for (int i=0; i<CardsPerPlayer;++i)
             {
                 newPlayer.DrawCard();
-                --undealtCards;
+               // --undealtCards;
             }
 
             return newPlayer;
@@ -114,7 +115,10 @@ namespace QuiddlerLibrary
             string deckDisplay = "";
             foreach (var cards in CardsInDeck)
             {
-                deckDisplay += $"{cards.Key}({cards.Value}) ";
+                //just to have a clear format
+                deckDisplay += $"{cards.Key,2:G}({cards.Value,2:G}) ";
+                if(cards.Key.Equals("l")|| cards.Key.Equals("x"))
+                    deckDisplay += "\n";
             }
             return deckDisplay;
         }

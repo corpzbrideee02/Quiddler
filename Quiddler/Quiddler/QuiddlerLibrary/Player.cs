@@ -59,7 +59,7 @@ namespace QuiddlerLibrary
             Cards.Add(GameDeck.CardsInDeck.ElementAt(index).Key);
 
             GameDeck.CardsInDeck[GameDeck.CardsInDeck.ElementAt(index).Key] = GameDeck.CardsInDeck.ElementAt(index).Value - 1;
-
+            --GameDeck.undealtCards;
             return Cards[CardCount - 1];
         }
 
