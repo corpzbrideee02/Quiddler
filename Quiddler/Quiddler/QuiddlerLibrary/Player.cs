@@ -59,7 +59,7 @@ namespace QuiddlerLibrary
             Cards.Add(GameDeck.CardsInDeck.ElementAt(index).Key);
 
             GameDeck.CardsInDeck[GameDeck.CardsInDeck.ElementAt(index).Key] = GameDeck.CardsInDeck.ElementAt(index).Value - 1;
-            --GameDeck.undealtCards;
+            //--GameDeck.undealtCards;
             return Cards[CardCount - 1];
         }
 
@@ -67,6 +67,7 @@ namespace QuiddlerLibrary
         {
             Cards.Add(GameDeck.TopDiscard);
             // TODO: TopDiscard gets next card's value
+            GameDeck.DiscardedCards.Pop();
             return Cards[CardCount - 1];
         }
 

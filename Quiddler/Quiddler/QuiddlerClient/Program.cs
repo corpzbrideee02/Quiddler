@@ -28,7 +28,14 @@ namespace QuiddlerClient
                 Console.Write("\nHow many players are there? (1‐8): ");
                 input = Console.ReadLine();
 
-                playerNum = int.Parse(input);
+                try
+                {
+                    playerNum = int.Parse(input);
+                }
+                catch
+                {
+                    playerNum = 0;
+                }
 
             } while (playerNum < 1 || playerNum > 8);
 
@@ -40,7 +47,14 @@ namespace QuiddlerClient
                 Console.Write("\nHow many cards will be dealt to each player? (3‐10): ");
                 input = Console.ReadLine();
 
-                cardNum = int.Parse(input);
+                try
+                {
+                    cardNum = int.Parse(input);
+                }
+                catch
+                {
+                    cardNum = 0;
+                }
 
             } while (cardNum < 3 || cardNum > 10);
 
@@ -52,7 +66,7 @@ namespace QuiddlerClient
             }
                 
 
-            Console.WriteLine($"Cards were dealt to {playerNum} player(s).");
+            Console.WriteLine($"\nCards were dealt to {playerNum} player(s).");
 
 
             Console.WriteLine($"The top card which was '{deck.TopDiscard}' was moved to the discard pile.");
@@ -66,107 +80,142 @@ namespace QuiddlerClient
             {
                 for (int i = 0; i < players.Count; ++i) // do this for each player in a round
                 {
-                    Console.WriteLine("\n‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
-                    Console.WriteLine($"Player {i+1} ({players[i].TotalPoints} points)");
-                    Console.WriteLine("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
-
-                    Console.WriteLine($"\nThe deck now contains the following {deck.CardCount} cards...");
-                    Console.WriteLine(deck);
-
-                    Console.WriteLine($"\nYour cards are [{players[i]}]");
-
-                    // ask for top discard
-                    do
+                    if (players[i].CardCount > 0) // checks if player is out
                     {
-                        //string discard2 = deck.TopDiscard;
-                        Console.Write($"\nDo you want the top card in the discard pile which is '{deck.TopDiscard}'? (y/n): ");
-                        yOrN = char.ToLower(Console.ReadKey().KeyChar);
+                        Console.WriteLine("\n‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
+                        Console.WriteLine($"Player {i + 1} ({players[i].TotalPoints} points)");
+                        Console.WriteLine("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
 
-                    } while ((yOrN != 'y') && (yOrN != 'n'));
+                        Console.WriteLine($"\nThe deck now contains the following {deck.CardCount} cards...");
+                        Console.WriteLine(deck);
 
-                    if (yOrN == 'n')
-                    {
-                        string drawnCard = players[i].DrawCard();
-                        Console.WriteLine($"\nThe dealer dealt '{drawnCard}' to you from the deck.");
-                        Console.WriteLine($"The deck contains {deck.CardCount} cards.");
-                    }
-                    else if (yOrN == 'y')
-                    {
-                        string topDC = players[i].PickupTopDiscard(); // may change this later once I know what to do with the returned string
-                    }
+                        Console.Write($"Your cards are [{players[i]}]");
 
-                    Console.WriteLine($"\nYour cards are [{players[i]}]");
-
-
-                    // test and play word
-
-                    bool testWord = true;
-
-                    do
-                    {
-                        Console.Write($"Test a word for its points value? (y/n): ");
-                        yOrN = char.ToLower(Console.ReadKey().KeyChar);
-
-                        if (yOrN == 'y')
+                        // ask for top discard
+                        do
                         {
-                            int points = 0;
-                            string enteredWord;
+                            //string discard2 = deck.TopDiscard;
+                            Console.Write($"\nDo you want the top card in the discard pile which is '{deck.TopDiscard}'? (y/n): ");
+                            yOrN = char.ToLower(Console.ReadKey().KeyChar);
 
-                            do
+                        } while ((yOrN != 'y') && (yOrN != 'n'));
+
+                        if (yOrN == 'n')
+                        {
+                            string drawnCard = players[i].DrawCard();
+                            Console.WriteLine($"\nThe dealer dealt '{drawnCard}' to you from the deck.");
+                            Console.Write($"The deck contains {deck.CardCount} cards.");
+                        }
+                        else if (yOrN == 'y')
+                        {
+                            string topDC = players[i].PickupTopDiscard(); // may change this later once I know what to do with the returned string
+                        }
+
+                        Console.Write($"\nYour cards are [{players[i]}]");
+
+
+                        // test and play word
+
+                        bool testWord = true;
+
+                        do
+                        {
+                            Console.Write($"\nTest a word for its points value? (y/n): ");
+                            yOrN = char.ToLower(Console.ReadKey().KeyChar);
+
+                            if (yOrN == 'y')
                             {
+                                int points = 0;
+                                string enteredWord;
+
                                 Console.Write($"\nEnter a word using [{players[i]}] leaving a space between cards: ");
 
                                 enteredWord = Console.ReadLine();
 
                                 points = players[i].TestWord(enteredWord);
 
-                                Console.WriteLine($"\nThe word [{enteredWord}] is worth {points} points.");
+                                Console.Write($"The word [{enteredWord}] is worth {points} points.");
 
-                            } while (points == 0);
 
+                                if (points > 0)
+                                {
+                                    do
+                                    {
+                                        Console.Write($"\nDo you want to play the word [{enteredWord}]? (y/n): ");
+                                        yOrN = char.ToLower(Console.ReadKey().KeyChar);
+
+                                    } while (yOrN != 'y' && yOrN != 'n');
+
+                                    if (yOrN == 'y')
+                                    {
+                                        points = players[i].PlayWord(enteredWord); // may change this later once I know what to do with the returned int
+
+                                        Console.WriteLine($"\nYour cards are [{players[i]}] and you have {players[i].TotalPoints} points.");
+                                        testWord = false; // playing the word so no need to test another one
+                                    }
+                                }
+
+                            }
+                            else if (yOrN == 'n')
+                                testWord = false;
+
+                        } while ((yOrN != 'y' && yOrN != 'n') || testWord); // if player chooses not to play a word they will be asked if they want to test another one instead
+
+                        if (players[i].CardCount > 0)
+                        {
                             do
                             {
-                                Console.Write($"Do you want to play the word [{enteredWord}]? (y/n): ");
-                                yOrN = char.ToLower(Console.ReadKey().KeyChar);
+                                Console.Write("\nEnter a card from your hand to drop on the discard pile: ");
+                                input = Console.ReadLine().ToLower();
+                                input = input.Trim(); // trims any leading/trailing spaces if needed
 
-                            } while (yOrN != 'y' && yOrN != 'n') ;
-                        
-                            if (yOrN == 'y')
-                            {
-                                points = players[i].PlayWord(enteredWord); // may change this later once I know what to do with the returned int
+                            } while (!players[i].ToString().Contains(input)); // check to see if entered card is in player's hand
 
-                                Console.WriteLine($"\nYour cards are [{players[i]}] and you have {players[i].TotalPoints} points.");
-                                testWord = false; // playing the word so no need to test another one
-                            }
+                            bool discarded = players[i].Discard(input); // may change this later once I know what to do with the returned bool
+
+                            Console.WriteLine($"Your cards are [{players[i]}]");
                         }
+                        else // discarding last card
+                        {
+                            Console.WriteLine($"\nDropping '{players[i]}' on the discard pile.");
 
-                    } while ((yOrN != 'y') && (yOrN != 'n' && testWord)); // if player chooses not to play a word they will be asked if they want to test another one instead
+                            bool discarded = players[i].Discard(players[i].ToString()); // may change this later once I know what to do with the returned bool
 
-                    do
-                    {
-                        Console.Write("\nEnter a card from your hand to drop on the discard pile: ");
-                        input = Console.ReadLine().ToLower();
-                        input = input.Trim(); // trims any leading/trailing spaces if needed
+                            Console.WriteLine($"\n***** Player {i + 1} is out! *****");
+                        }
+                    }
+                    
 
-                    } while (!players[i].ToString().Contains(input)); // check to see if entered card is in player's hand
-
-                    bool discarded = players[i].Discard(input); // may change this later once I know what to do with the returned bool
-
-                    Console.WriteLine($"\nYour cards are [{players[i]}]");
+                    
                 }
 
-                do
+                playerNum = 0;
+
+                foreach (var p in players) // checking how many players are still in the game
                 {
-                    Console.Write("Would you like each player to take another turn? (y/n): ");
-                    yOrN = char.ToLower(Console.ReadKey().KeyChar);
+                    if (p.CardCount == 0)
+                        ++playerNum;
+                }
 
-                } while (yOrN != 'y' && yOrN != 'n');
-
-                if (yOrN == 'n')
+                if (playerNum >= players.Count - 1)
                 {
-                    quitGame = true;
+                    do
+                    {
+                        Console.Write("\nWould you like each player to take another turn? (y/n): ");
+                        yOrN = char.ToLower(Console.ReadKey().KeyChar);
 
-                    Console.WriteLine("\nRetiring the game.\n");
+                    } while (yOrN != 'y' && yOrN != 'n');
+
+                    if (yOrN == 'n')
+                        quitGame = true;
+                }
+                else
+                    quitGame = true; // only one player is left so end the game
+                
+
+                if (quitGame)
+                {
+                    Console.WriteLine("\n\nRetiring the game.\n");
 
                     Console.WriteLine("The final scores are...");
                     Console.WriteLine("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
