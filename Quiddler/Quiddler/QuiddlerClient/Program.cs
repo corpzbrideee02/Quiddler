@@ -67,10 +67,7 @@ namespace QuiddlerClient
                 players.Add(deck.NewPlayer());
             }
                 
-
             Console.WriteLine($"\nCards were dealt to {playerNum} player(s).");
-
-
             Console.WriteLine($"The top card which was '{deck.TopDiscard}' was moved to the discard pile.");
 
             // PLAY THE GAME
@@ -84,7 +81,7 @@ namespace QuiddlerClient
                 {
                     if (players[i].CardCount > 0) // checks if player is out
                     {
-                        Console.WriteLine("\n‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
+                        Console.WriteLine("\n\n‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
                         Console.WriteLine($"Player {i + 1} ({players[i].TotalPoints} points)");
                         Console.WriteLine("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
 
@@ -115,7 +112,6 @@ namespace QuiddlerClient
 
                         Console.Write($"\nYour cards are [{players[i]}]");
 
-
                         // test and play word
 
                         bool testWord = true;
@@ -131,13 +127,10 @@ namespace QuiddlerClient
                                 string enteredWord;
 
                                 Console.Write($"\nEnter a word using [{players[i]}] leaving a space between cards: ");
-
                                 enteredWord = Console.ReadLine();
 
                                 points = players[i].TestWord(enteredWord);
-
                                 Console.Write($"The word [{enteredWord}] is worth {points} points.");
-
 
                                 if (points > 0)
                                 {
@@ -171,7 +164,7 @@ namespace QuiddlerClient
                                 input = Console.ReadLine().ToLower();
                                 input = input.Trim(); // trims any leading/trailing spaces if needed
 
-                            } while (!players[i].ToString().Contains(input)); // check to see if entered card is in player's hand
+                            } while (!players[i].ToString().Contains(input) || input.Length == 0); // check to see if entered card is in player's hand
 
                             bool discarded = players[i].Discard(input); // may change this later once I know what to do with the returned bool
 
@@ -185,10 +178,7 @@ namespace QuiddlerClient
 
                             Console.WriteLine($"\n***** Player {i + 1} is out! *****");
                         }
-                    }
-                    
-
-                    
+                    }                                   
                 }
 
                 playerNum = 0;
@@ -199,8 +189,8 @@ namespace QuiddlerClient
                         ++playerNum;
                 }
 
-                if (playerNum > 0)
-                {
+                if ((players.Count == 1 && playerNum == 1) || (players.Count > 1 && playerNum > 1)) // if it's a 1 player game, keep playing until player is out of cards or they say so
+                {                                                                                  // if there's more than 1 player, keep playing until only 1 player remains then end the game
                     do
                     {
                         Console.Write("\nWould you like each player to take another turn? (y/n): ");
@@ -209,17 +199,17 @@ namespace QuiddlerClient
                     } while (yOrN != 'y' && yOrN != 'n');
 
                     if (yOrN == 'n')
+                    {
                         quitGame = true;
+                        Console.WriteLine("\n\nRetiring the game.");
+                    }                        
                 }
                 else
                     quitGame = true; // only one player is left so end the game
                 
-
                 if (quitGame)
                 {
-                    Console.WriteLine("\n\nRetiring the game.\n");
-
-                    Console.WriteLine("The final scores are...");
+                    Console.WriteLine("\nThe final scores are...");
                     Console.WriteLine("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
 
                     for (int i = 0; i < players.Count; ++i)
