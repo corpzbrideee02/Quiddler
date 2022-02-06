@@ -13,8 +13,10 @@ namespace QuiddlerClient
             // SET UP FOR GAME
 
             IDeck deck = new Deck();
+            IDisposable disposeDeck = (IDisposable)deck;
+          
             List<IPlayer> players = new List<IPlayer>();
-
+            
             Console.WriteLine(deck.About);
 
             string input;
@@ -150,7 +152,7 @@ namespace QuiddlerClient
                                     {
                                         points = players[i].PlayWord(enteredWord); // may change this later once I know what to do with the returned int
 
-                                        Console.WriteLine($"\nYour cards are [{players[i]}] and you have {players[i].TotalPoints} points.");
+                                        Console.Write($"\nYour cards are [{players[i]}] and you have {players[i].TotalPoints} points.");
                                         testWord = false; // playing the word so no need to test another one
                                     }
                                 }
@@ -161,7 +163,7 @@ namespace QuiddlerClient
 
                         } while ((yOrN != 'y' && yOrN != 'n') || testWord); // if player chooses not to play a word they will be asked if they want to test another one instead
 
-                        if (players[i].CardCount > 0)
+                        if (players[i].CardCount > 1)
                         {
                             do
                             {
@@ -193,11 +195,11 @@ namespace QuiddlerClient
 
                 foreach (var p in players) // checking how many players are still in the game
                 {
-                    if (p.CardCount == 0)
+                    if (p.CardCount != 0)
                         ++playerNum;
                 }
 
-                if (playerNum >= players.Count - 1)
+                if (playerNum > 0)
                 {
                     do
                     {
@@ -224,6 +226,7 @@ namespace QuiddlerClient
                     {
                         Console.WriteLine($"Player {i + 1}: {players[i].TotalPoints} points");
                     }
+                    disposeDeck.Dispose();//Dispose
                 }
 
             } while (!quitGame);

@@ -3,23 +3,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Office.Interop.Word;
 
 namespace QuiddlerLibrary
 {
-    public class Deck : IDeck
+    public class Deck : IDeck, IDisposable
     {
         // Private member variables
         private int cardsToBeDealt = 0;
-        //public int undealtCards = 118;
-        //private const int NumberOfCards = 118;
-        //private string topDiscard = "";
+        private bool disposedValue;
 
         //c'tor 
-        /*public Deck()
+        public Deck()
         {
-            ShuffleCardsInDeck();
-        }*/
-
+            app = new Application();
+        }
+        public Application app;
 
         public string About => $"Test Client for: {GetType().Namespace}, Developers: Brittany Diesbourg and Dianne Corpuz";
 
@@ -39,7 +38,7 @@ namespace QuiddlerLibrary
         //stack of discarded Cards
         public Stack<string> DiscardedCards = new Stack<string>();
 
-        
+
         //implementation of IDeck Interface
         public int CardCount
         {
@@ -104,13 +103,11 @@ namespace QuiddlerLibrary
                         selectedTopDiscard = CardsInDeck.ElementAt(index).Key;
                         CardsInDeck[CardsInDeck.ElementAt(index).Key] = CardsInDeck.ElementAt(index).Value - 1;
                         DiscardedCards.Push(selectedTopDiscard);
-                        //--undealtCards;
                     }
 
                     return selectedTopDiscard;
                 }
 
-                //--undealtCards;
                return DiscardedCards.Peek();
             }
         }
@@ -123,7 +120,6 @@ namespace QuiddlerLibrary
             for (int i=0; i<CardsPerPlayer;++i)
             {
                 newPlayer.DrawCard();
-               // --undealtCards;
             }
 
             return newPlayer;
@@ -143,22 +139,36 @@ namespace QuiddlerLibrary
             return deckDisplay;
         }
 
-        //*************************************NoTE: just added these methods...   *************************************
+       
 
-        public List<string> ShuffleCardsInDeck()
+        protected virtual void Dispose(bool disposing)
         {
-            List<string> ShuffledCardsList = new List<string>();
-            foreach (var cards in CardsInDeck)
+            if (!disposedValue)
             {
-                for (int i = 0; i < cards.Value; ++i)
+                if (disposing)
                 {
-                    ShuffledCardsList.Add(cards.Key);
+                    // TODO: dispose managed state (managed objects)
+                    app.Quit();
                 }
-            }
 
-            ShuffledCardsList = ShuffledCardsList.OrderBy(item => Guid.NewGuid()).ToList();
-            return ShuffledCardsList;
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                disposedValue = true;
+            }
         }
 
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~Deck()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

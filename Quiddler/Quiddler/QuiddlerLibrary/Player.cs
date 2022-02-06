@@ -59,7 +59,6 @@ namespace QuiddlerLibrary
             Cards.Add(GameDeck.CardsInDeck.ElementAt(index).Key);
 
             GameDeck.CardsInDeck[GameDeck.CardsInDeck.ElementAt(index).Key] = GameDeck.CardsInDeck.ElementAt(index).Value - 1;
-            //--GameDeck.undealtCards;
             return Cards[CardCount - 1];
         }
 
@@ -111,10 +110,8 @@ namespace QuiddlerLibrary
                         points += cardPoints.Value;
                     }
 
-                    Application App = new Application(); // should be moved to Deck class
-
-                    bool isWord = App.CheckSpelling(wordNoSpace);
-                    App.Quit(); // call in Dispose?
+                    bool isWord = GameDeck.app.CheckSpelling(wordNoSpace);
+                    
 
                     if (isWord)
                         return points;
@@ -133,6 +130,11 @@ namespace QuiddlerLibrary
             cardsDisplay = cardsDisplay.Trim(); // removes last space
 
             return cardsDisplay;
+        }
+
+        public void QuitWordApp()
+        {
+            GameDeck.app.Quit();
         }
     }
 }
