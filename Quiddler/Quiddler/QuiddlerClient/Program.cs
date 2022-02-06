@@ -150,7 +150,7 @@ namespace QuiddlerClient
                                     {
                                         points = players[i].PlayWord(enteredWord); // may change this later once I know what to do with the returned int
 
-                                        Console.WriteLine($"\nYour cards are [{players[i]}] and you have {players[i].TotalPoints} points.");
+                                        Console.Write($"\nYour cards are [{players[i]}] and you have {players[i].TotalPoints} points.");
                                         testWord = false; // playing the word so no need to test another one
                                     }
                                 }
@@ -161,7 +161,7 @@ namespace QuiddlerClient
 
                         } while ((yOrN != 'y' && yOrN != 'n') || testWord); // if player chooses not to play a word they will be asked if they want to test another one instead
 
-                        if (players[i].CardCount > 0)
+                        if (players[i].CardCount > 1)
                         {
                             do
                             {
