@@ -132,9 +132,5 @@ namespace QuiddlerLibrary
             return cardsDisplay;
         }
 
-        public void QuitWordApp()
-        {
-            GameDeck.app.Quit();
-        }
     }
 }
