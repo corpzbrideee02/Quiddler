@@ -13,8 +13,6 @@ namespace QuiddlerClient
             // SET UP FOR GAME
 
             IDeck deck = new Deck();
-            IDisposable disposeDeck = (IDisposable)deck;
-          
             List<IPlayer> players = new List<IPlayer>();
             
             Console.WriteLine(deck.About);
@@ -216,7 +214,7 @@ namespace QuiddlerClient
                     {
                         Console.WriteLine($"Player {i + 1}: {players[i].TotalPoints} points");
                     }
-                    disposeDeck.Dispose();//Dispose
+                    deck.Dispose();//Dispose
                 }
 
             } while (!quitGame);
