@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Word;
 
 namespace QuiddlerLibrary
 {
-    public class Deck : IDeck, IDisposable
+    public class Deck : IDeck
     {
         // Private member variables
         private int cardsToBeDealt = 0;
