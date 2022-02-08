@@ -50,19 +50,6 @@ namespace QuiddlerLibrary
                     cardNum += c.Value;
                 }
 
-                if (cardNum == 0)
-                {
-                    // if deck is empty put the discarded cards back in deck
-                    CardsInDeck = new Dictionary<string, int>()
-                     {
-                             {"a",10}, {"b",2},  {"c",2},{"d",4}, {"e",12},{"f",2},{"g",4}, {"h",2},{"i",8},  {"j",2},  {"k",2},  {"l",4}, {"m",2},{"n",6}, {"o",8},
-                              {"p",2}, {"q",2},{"r",6},{"s",4},{"t",6},{"u",6}, {"v",2}, {"w",2}, {"x",2},  {"y",4}, {"z",2},  {"cl",2}, {"er",2}, {"in",2},{"qu",2}, {"th",2},
-                     };
-
-                    DiscardedCards.Clear();
-                    cardNum = 118;
-                }
-
                 return cardNum;
             }
         }
@@ -92,18 +79,14 @@ namespace QuiddlerLibrary
         {
             get
             {
-                if(DiscardedCards.Count==0)
+                if (DiscardedCards.Count==0)
                 {
                     var random_ = new Random();
-                    int index = random_.Next(CardsInDeck.Count());  //index of random picked items
+                    int index = random_.Next(CardsInDeck.Count() - 1);  //index of random picked items
+                    string selectedTopDiscard = CardsInDeck.ElementAt(index).Key;
 
-                    string selectedTopDiscard = "";
-                    if (CardsInDeck.ElementAt(index).Value > 0)
-                    {
-                        selectedTopDiscard = CardsInDeck.ElementAt(index).Key;
-                        CardsInDeck[CardsInDeck.ElementAt(index).Key] = CardsInDeck.ElementAt(index).Value - 1;
-                        DiscardedCards.Push(selectedTopDiscard);
-                    }
+                    CardsInDeck[CardsInDeck.ElementAt(index).Key] = CardsInDeck.ElementAt(index).Value - 1; // decrease the number of that specific card when it's removed from deck
+                    DiscardedCards.Push(selectedTopDiscard);
 
                     return selectedTopDiscard;
                 }

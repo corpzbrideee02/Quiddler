@@ -34,7 +34,7 @@ namespace QuiddlerClient
                 }
                 catch
                 {
-                    playerNum = 0;
+                    playerNum = 0; // if input is not a number, just assign 0 and it will ask again
                 }
 
             } while (playerNum < 1 || playerNum > 8);
@@ -53,7 +53,7 @@ namespace QuiddlerClient
                 }
                 catch
                 {
-                    cardNum = 0;
+                    cardNum = 0; // if input is not a number, just assign 0 and it will ask again
                 }
 
             } while (cardNum < 3 || cardNum > 10);
@@ -61,9 +61,7 @@ namespace QuiddlerClient
             deck.CardsPerPlayer = cardNum;
 
             for (int i = 0; i < playerNum; ++i)
-            {
                 players.Add(deck.NewPlayer());
-            }
                 
             Console.WriteLine($"\nCards were dealt to {playerNum} player(s).");
             Console.WriteLine($"The top card which was '{deck.TopDiscard}' was moved to the discard pile.");
@@ -79,7 +77,7 @@ namespace QuiddlerClient
                 {
                     if (players[i].CardCount > 0) // checks if player is out
                     {
-                        Console.WriteLine("\n\n‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
+                        Console.WriteLine("\n‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
                         Console.WriteLine($"Player {i + 1} ({players[i].TotalPoints} points)");
                         Console.WriteLine("‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐");
 
@@ -91,22 +89,18 @@ namespace QuiddlerClient
                         // ask for top discard
                         do
                         {
-                            //string discard2 = deck.TopDiscard;
                             Console.Write($"\nDo you want the top card in the discard pile which is '{deck.TopDiscard}'? (y/n): ");
                             yOrN = char.ToLower(Console.ReadKey().KeyChar);
 
-                        } while ((yOrN != 'y') && (yOrN != 'n'));
+                        } while (yOrN != 'y' && yOrN != 'n');
 
                         if (yOrN == 'n')
                         {
-                            string drawnCard = players[i].DrawCard();
-                            Console.WriteLine($"\nThe dealer dealt '{drawnCard}' to you from the deck.");
+                            Console.WriteLine($"\nThe dealer dealt '{players[i].DrawCard()}' to you from the deck.");
                             Console.Write($"The deck contains {deck.CardCount} cards.");
                         }
                         else if (yOrN == 'y')
-                        {
-                            string topDC = players[i].PickupTopDiscard(); // may change this later once I know what to do with the returned string
-                        }
+                            players[i].PickupTopDiscard();
 
                         Console.Write($"\nYour cards are [{players[i]}]");
 
@@ -141,7 +135,7 @@ namespace QuiddlerClient
 
                                     if (yOrN == 'y')
                                     {
-                                        points = players[i].PlayWord(enteredWord); // may change this later once I know what to do with the returned int
+                                        players[i].PlayWord(enteredWord);
 
                                         Console.Write($"\nYour cards are [{players[i]}] and you have {players[i].TotalPoints} points.");
                                         testWord = false; // playing the word so no need to test another one
@@ -156,15 +150,15 @@ namespace QuiddlerClient
 
                         if (players[i].CardCount > 1)
                         {
+                            Console.WriteLine(); // for space
+
                             do
                             {
-                                Console.Write("\nEnter a card from your hand to drop on the discard pile: ");
+                                Console.Write("Enter a card from your hand to drop on the discard pile: ");
                                 input = Console.ReadLine().ToLower();
                                 input = input.Trim(); // trims any leading/trailing spaces if needed
 
-                            } while (!players[i].ToString().Contains(input) || input.Length == 0); // check to see if entered card is in player's hand
-
-                            bool discarded = players[i].Discard(input); // may change this later once I know what to do with the returned bool
+                            } while (!players[i].Discard(input)); // check to see if card is in player's hand then discards its
 
                             Console.WriteLine($"Your cards are [{players[i]}]");
                         }
@@ -172,7 +166,7 @@ namespace QuiddlerClient
                         {
                             Console.WriteLine($"\nDropping '{players[i]}' on the discard pile.");
 
-                            bool discarded = players[i].Discard(players[i].ToString()); // may change this later once I know what to do with the returned bool
+                            players[i].Discard(players[i].ToString());
 
                             Console.WriteLine($"\n***** Player {i + 1} is out! *****");
                         }
@@ -193,13 +187,14 @@ namespace QuiddlerClient
                     {
                         Console.Write("\nWould you like each player to take another turn? (y/n): ");
                         yOrN = char.ToLower(Console.ReadKey().KeyChar);
+                        Console.WriteLine(); // for space
 
                     } while (yOrN != 'y' && yOrN != 'n');
 
                     if (yOrN == 'n')
                     {
                         quitGame = true;
-                        Console.WriteLine("\n\nRetiring the game.");
+                        Console.WriteLine("\nRetiring the game.");
                     }                        
                 }
                 else
