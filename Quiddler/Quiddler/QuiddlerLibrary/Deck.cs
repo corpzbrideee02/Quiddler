@@ -10,24 +10,25 @@ namespace QuiddlerLibrary
     public class Deck : IDeck
     {
         // Private member variables
-        private int cardsToBeDealt = 0;
+        private int cardsToBeDealt;
         private bool disposedValue;
 
-        //c'tor 
+        //Deck constructor
         public Deck()
         {
-            app = new Application();
+            app = new Application(); //it makes sure that Application from Microsoft.Office.Interop.Word is initialized once.
+            cardsToBeDealt = 0;    //initialize cards to be dealt by players to zero
         }
         public Application app;
 
-        public string About => $"Test Client for: {GetType().Namespace}, Developers: Brittany Diesbourg and Dianne Corpuz";
-
+        //a card's deck dictionary that contains the letters and its value(frequency of the card in the hand)
         public Dictionary<string, int> CardsInDeck = new Dictionary<string, int>()
          {
                  {"a",10}, {"b",2},  {"c",2},{"d",4}, {"e",12},{"f",2},{"g",4}, {"h",2},{"i",8},  {"j",2},  {"k",2},  {"l",4}, {"m",2},{"n",6}, {"o",8},
                   {"p",2}, {"q",2},{"r",6},{"s",4},{"t",6},{"u",6}, {"v",2}, {"w",2}, {"x",2},  {"y",4}, {"z",2},  {"cl",2}, {"er",2}, {"in",2},{"qu",2}, {"th",2},
          };
 
+        //a card's deck dictionary that contains the letters and its value(equivalent points of that letter)
         public Dictionary<string, int> CardPointValues = new Dictionary<string, int>()
          {
                  {"a",2}, {"b",8},  {"c",8},{"d",5}, {"e",2},{"f",6},{"g",6}, {"h",7},{"i",2},  {"j",13},  {"k",8},  {"l",3}, {"m",5},{"n",5}, {"o",2},
@@ -39,7 +40,11 @@ namespace QuiddlerLibrary
         public Stack<string> DiscardedCards = new Stack<string>();
 
 
-        //implementation of IDeck Interface
+ /*Implementation of IDeck Interface*/
+
+        public string About => $"Test Client for: {GetType().Namespace}, Developers: Brittany Diesbourg and Dianne Corpuz";
+
+        //returns number of undealt cards
         public int CardCount
         {
             get
@@ -58,7 +63,8 @@ namespace QuiddlerLibrary
         {
             get
             {
-                if (cardsToBeDealt < 3 && cardsToBeDealt > 10)
+                //checks if cards to be dealt by players is between 3 and 10
+                if (cardsToBeDealt < 3 && cardsToBeDealt > 10) 
                 {
                     throw new ArgumentOutOfRangeException("Invalid input" + cardsToBeDealt);
                 }
@@ -75,10 +81,12 @@ namespace QuiddlerLibrary
             }
         }
 
+        //returns top card on the discard pile
         public string TopDiscard
         {
             get
             {
+                //If TopDiscard is uninitialized when read, then it will initialize itself by taking the next card from the deck before returning that card string.
                 if (DiscardedCards.Count==0)
                 {
                     var random_ = new Random();
@@ -95,9 +103,9 @@ namespace QuiddlerLibrary
             }
         }
 
+        //creates new player, populates it with CardsPerPlayer cards by calling the Drawcard method
         IPlayer IDeck.NewPlayer()
         {
-            //create new player, populates it with CardsPerPlayer cards
             IPlayer newPlayer = new Player(this);
 
             for (int i=0; i<CardsPerPlayer;++i)
@@ -107,13 +115,12 @@ namespace QuiddlerLibrary
 
             return newPlayer;
         }
-
+        //displays an inventory of cards available in the deck in a formatted string
         public override string ToString()
         {
             string deckDisplay = "";
             foreach (var cards in CardsInDeck)
             {
-                //just to have a clear format
                 deckDisplay += $"{cards.Key,2:G}({cards.Value,2:G}) ";
                 if(cards.Key.Equals("l")|| cards.Key.Equals("x"))
                     deckDisplay += "\n";
